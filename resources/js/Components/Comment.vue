@@ -12,7 +12,7 @@ import axios from 'axios';
             <template v-if="post != null">
                 <p><span class="font-bold">{{ post.user.data.name }}</span> - {{ post.description }}</p> 
                 <p class="font-light">{{ post.created_at }}</p>
-                <a href="#" v-on:click="replyingId = post.id">Reply</a>
+                <a href="#" v-on:click="replyingId = post.id">Reply</a>&nbsp;<a v-if="deleteRoute != null" href="#" v-on:click="deletePost(post.id)">Delete</a>
                 <template v-if="replyingId == post.id">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-2 bg-white border-b border-gray-200">
@@ -37,6 +37,7 @@ import axios from 'axios';
                         <Comment
                             :send-reply-route="sendReplyRoute"
                             :post="childPost"
+                            :delete-route="deleteRoute"
                         ></Comment>
                     </div>
                 </template>
@@ -66,7 +67,8 @@ export default {
     props: {
         post : Object,
         sendReplyRoute: String,
-        createCommentRoute: String
+        createCommentRoute: String,
+        deleteRoute : String
     },
     data() {
         return {
@@ -97,6 +99,19 @@ export default {
             axios.post(`${this.createCommentRoute}`, {
                 comment : this.comment
             }).then(response => {
+                console.log("comment", response)
+                this.processing = false;
+                this.comment = "";
+                Inertia.reload()
+            }).catch(error => {
+                console.log("error", error);
+                this.processing = false;
+            })
+        },
+        deletePost(postId) {
+            this.processing = true;
+            axios.delete(`${this.deleteRoute}/${postId}`)
+            .then(response => {
                 console.log("comment", response)
                 this.processing = false;
                 this.comment = "";

@@ -37,6 +37,7 @@ Route::middleware(['auth', 'can:create posts'])->group(function() {
 
 Route::middleware(['auth', 'role:admin'])->group(function() {
     Route::get('/admin', [AdminController::class, 'show'])->name('adminDashboard');
+    Route::delete('delete/{post}', [CommentsController::class, 'delete']);
 });
 
 require __DIR__.'/auth.php';

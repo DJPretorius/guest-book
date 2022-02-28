@@ -83,4 +83,9 @@ class CommentsController extends Controller
         $reply->parent()->associate($post);
         $reply->save();
     }
+
+    public function delete(Request $request, Post $post)
+    {
+        $post->delete();
+    }
 }

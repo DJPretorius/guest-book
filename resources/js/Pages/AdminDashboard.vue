@@ -9,7 +9,8 @@ import axios from 'axios';
 
 defineProps({
     posts: Object,
-    sendReplyRoute: String
+    sendReplyRoute: String,
+    deleteRoute: String
 })
 </script>
 
@@ -32,6 +33,7 @@ defineProps({
                             <comment
                                 :send-reply-route="sendReplyRoute"
                                 :post="post"
+                                :delete-route="deleteRoute"
                             ></comment>
                         </div>
                     </div>

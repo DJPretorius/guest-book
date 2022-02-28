@@ -33,7 +33,8 @@ class AdminController extends Controller
         $posts = new LengthAwarePaginator($posts, $paginator->total(), $paginator->perPage(), $paginator->currentPage(), $paginator->getOptions());
         return Inertia::render('AdminDashboard', [
             'posts' => $posts,
-            'sendReplyRoute' => url('/reply')
+            'sendReplyRoute' => url('/reply'),
+            'deleteRoute' => url('/delete')
         ]);
     }
 }
