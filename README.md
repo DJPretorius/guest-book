@@ -17,6 +17,7 @@ Run the following commands to setup the service locally. We use `docker` for set
 ```
 docker run --rm -v ${PWD}:/app composer install
 npm install
+npm run dev
 docker-compose -f .docker/docker-local.yml up -d
 php artisan migrate
 php artisan db:seed 
