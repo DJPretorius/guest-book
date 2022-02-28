@@ -20,7 +20,8 @@ npm install
 npm run dev
 docker-compose -f .docker/docker-local.yml up -d
 php artisan migrate
-php artisan db:seed 
+php artisan db:seed
+php artisan serve
 ```
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
